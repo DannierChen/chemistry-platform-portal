@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TaskTable from './components/TaskTable';
+import VideoFilter from './components/VideoFilter';
 
 export default class Task extends Component {
   static displayName = 'Task';
@@ -16,6 +17,7 @@ export default class Task extends Component {
   render() {
     return (
       <div>
+        <VideoFilter />
         <TaskTable />
       </div>
     );

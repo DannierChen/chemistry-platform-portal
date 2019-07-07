@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import IceContainer from '@icedesign/container';
 import CustomTable from '../../../../components/CustomTable';
-import TableFilter from '../TableFilter';
 import styles from './index.module.scss';
 
 const getData = (length = 10) => {
@@ -125,10 +124,6 @@ export default class TaskTable extends Component {
 
     return (
       <IceContainer>
-        <div className={styles.tableHead}>
-          <div className={styles.tableTitle}>构建任务</div>
-        </div>
-        <TableFilter handleSubmit={this.handleSubmit} />
         <CustomTable
           columns={this.columnsConfig()}
           dataSource={data}
