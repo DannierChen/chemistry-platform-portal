@@ -8,10 +8,13 @@ import Setting from './pages/Setting';
 import Dashboard from './pages/Dashboard';
 import Builder from './pages/Builder';
 import Task from './pages/Task';
-import ArticleList from './pages/ArticleList'
-import ArticleDetail from './pages/ArticleDetail'
-import VideoList from './pages/VideoList'
-import VideoDetail from './pages/Video/'
+import ArticleList from './pages/ArticleList';
+import ArticleDetail from './pages/ArticleDetail';
+import VideoList from './pages/VideoList';
+import VideoDetail from './pages/Video';
+
+import ExperimentDetail from './pages/ExperimentDetail';
+import ExperimentList from './pages/ExperimentList';
 
 const routerConfig = [
   {
@@ -31,8 +34,8 @@ const routerConfig = [
     component: Builder,
   },
   {
-    path: '/task',
-    component: Task,
+    path: '/experiment/list',
+    component: ExperimentList,
   },
   {
     path: '/setting',
@@ -53,6 +56,14 @@ const routerConfig = [
   {
     path: '/article/detail/:articleId',
     component: ArticleDetail,
+  },
+  {
+    path: '/experiment/list',
+    component: ExperimentList,
+  },
+  {
+    path: '/experiment/detail/:experimentId',
+    component: ExperimentDetail,
   },
   // {
   //   path: '/discuz/list',

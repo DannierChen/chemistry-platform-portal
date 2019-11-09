@@ -18,6 +18,7 @@
     "@icedesign/img": "^1.x",
     "@icedesign/layout": "^1.x",
     "@icedesign/theme": "^1.x",
+    "braft-editor": "^2.3.8",
     "classnames": "^2.2.5",
     "fabric": "^3.4.0",
     "highcharts": "^6.1.1",

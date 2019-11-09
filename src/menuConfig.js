@@ -19,7 +19,7 @@ const asideMenuConfig = [
   },
   {
     name: '实验设计',
-    path: '/task',
+    path: '/experiment/list',
     icon: 'repair',
   },
   {
