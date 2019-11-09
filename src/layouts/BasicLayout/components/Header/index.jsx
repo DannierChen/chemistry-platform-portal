@@ -39,6 +39,7 @@ export default class Header extends Component {
                 headerMenuConfig.length > 0 &&
                 headerMenuConfig.map((nav, index) => {
                   if (nav.children && nav.children.length > 0) {
+                    console.log(nav);
                     return (
                       <Nav.SubNav
                         triggerType="click"
@@ -46,7 +47,7 @@ export default class Header extends Component {
                         icon={nav.icon ? (
                           <FoundationSymbol size="small" type={nav.icon} />
                             ) : null}
-                        title={
+                        label={
                           <span className="ice-nav-item-text">
                             {nav.name}
                           </span>

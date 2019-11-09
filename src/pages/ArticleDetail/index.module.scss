@@ -1,0 +1,204 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+}
+.article-area {
+  width: 700px;
+  background-color: #fff;
+  border-bottom:1px solid #d5d7da;
+
+}
+
+.article-content {
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    text-align: center;
+  }
+  p {
+    text-align: start;
+    color: #333;
+    font-size: 15px;
+    line-height: inherit;
+    margin-top: 22px;
+    margin-bottom: 22px;
+    line-height: 1.75;
+  }
+}
+
+.comment-list-box {
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comment-title {
+  color: #8a9aa9;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  padding: 1.67rem 0 5px;
+}
+
+.comment-form {
+  width: 652px;
+  height: 62px;
+  display: flex;
+  position: relative;
+  padding: 1rem 1.333rem;
+  margin: 15px 0px;
+  background-color: #fafbfc;
+  border-radius: 3px;
+  flex-direction: row;
+}
+
+.my-input {
+  width: 574px;
+  height: 36px;
+  padding: 7.1px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.my-input-class {
+  width: 560px;
+}
+
+.comment-item {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  border-bottom:1px solid #d5d7da;
+}
+
+.comment-info {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.comment-header {
+  width: 100%;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  color: #B2BAC2;
+  font-size: 12px;
+  span{
+    padding-right: 2px;
+  }
+}
+
+.comment {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #505050;
+}
+
+.comment-footer{
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 12px;
+
+}
+
+.testBtn{
+  width: 80%;
+  margin-bottom: 20px;
+  padding: 12px 0; 
+}
+
+.other {
+  position: relative;
+  margin-bottom: 1.5rem;
+  border-radius: 2px;
+  padding-left: 20px;
+}
+
+.teacher-info {
+  width: 240px;
+  height: 125px;
+  background-color: #fff;
+  border-bottom:1px solid #d5d7da;
+  display: flex;
+  flex-direction:column;
+  justify-content: start;
+  margin: 0 0 18px;
+}
+
+.info-title {
+  height: 44px;
+  padding: 1rem 1.3rem;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 1px solid hsla(0,0%,58.8%,.1);
+}
+
+.info-list {
+  display: flex;
+  flex-direction: row;
+  padding: 1.3rem;
+}
+
+.test {
+  width: 240px;
+  height: 125px;
+  background-color: #fff;
+  border-bottom:1px solid #d5d7da;
+  display: flex;
+  flex-direction:column;
+  justify-content: start;
+}
+
+.test-list {
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  text-align: center;
+}
+
+.xinde {
+  width: 240px;
+  height: 230px;
+  background-color: #fff;
+  border-bottom:1px solid #d5d7da;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  margin: 0 0 18px;
+ 
+}
+
+.xinde-list {
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  text-align: center;
+}
+
+.img {
+  border-radius: 50%;
+}
+
+.teacher-name {
+  color: #333;
+}
+
+.time {
+  color:#909090;
+  padding-top: 2px;
+}
+
+

@@ -1,0 +1,44 @@
+/*
+* @Author: DannierChen
+* @Date:   2019-07-07 16:10:09
+* @Last Modified by:   DannierChen
+* @Last Modified time: 2019-07-07 16:28:28
+*/
+
+.article-list-page {
+}
+
+.article-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    min-width: 0;
+    height: 120px;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(178,186,194,.15);
+    cursor: pointer;
+    &:hover {
+        background-color: #fcfcfc;
+    }
+}
+
+.article-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.sub-title {
+    color: red;
+    span {
+        margin-right: 2px;
+        &:after {
+            content: "·";
+        }
+    }
+}
+
+.title {
+    color: #2e3135;
+    font-size: 18px;
+}

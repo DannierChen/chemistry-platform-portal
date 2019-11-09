@@ -8,7 +8,10 @@ import Setting from './pages/Setting';
 import Dashboard from './pages/Dashboard';
 import Builder from './pages/Builder';
 import Task from './pages/Task';
-import New from './pages/New';
+import ArticleList from './pages/ArticleList'
+import ArticleDetail from './pages/ArticleDetail'
+import VideoList from './pages/VideoList'
+import VideoDetail from './pages/Video/'
 
 const routerConfig = [
   {
@@ -32,13 +35,29 @@ const routerConfig = [
     component: Task,
   },
   {
-    path: '/new',
-    component: New,
-  },
-  {
     path: '/setting',
     component: Setting,
   },
+  {
+    path: '/video/list',
+    component: VideoList,
+  },
+  {
+    path: '/video/detail/:videoId',
+    component: VideoDetail,
+  },
+  {
+    path: '/article/list',
+    component: ArticleList,
+  },
+  {
+    path: '/article/detail/:articleId',
+    component: ArticleDetail,
+  },
+  // {
+  //   path: '/discuz/list',
+  //   component: DiscuzList,
+  // }
 ];
 
 export default routerConfig;
