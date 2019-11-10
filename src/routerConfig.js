@@ -7,7 +7,6 @@ import UserRegister from './pages/UserRegister';
 import Setting from './pages/Setting';
 import Dashboard from './pages/Dashboard';
 import Builder from './pages/Builder';
-import Task from './pages/Task';
 import ArticleList from './pages/ArticleList';
 import ArticleDetail from './pages/ArticleDetail';
 import VideoList from './pages/VideoList';

@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import IceContainer from '@icedesign/container';
 import {
   Button,
-  DatePicker,
   Radio,
+  Dialog,
   Message,
-  Pagination,
   Upload,
-  Form, Input, Select
+  Form,
+  Field,
+  Select
 } from '@alifd/next';
 
 import { withRouter } from 'react-router-dom';
@@ -33,10 +34,14 @@ export default class New extends Component {
 
   static defaultProps = {};
 
+  field = new Field(this);
+
   state = {
     examData: {},
+    reportData: {},
     experimentData: {},
-    examContentVisible: false
+    examContentVisible: false,
+    experimentDesignVisible: false
   }
 
   constructor(props) {
@@ -70,6 +75,28 @@ export default class New extends Component {
         this.setState({
           score: res.data.score
         });
+      }
+    });
+
+    Axios('/report/getReport', {
+      params: {
+        experiment_id: experimentId
+      }
+    }).then(res => {
+      res = res.data;
+
+      if (res.success) {
+        this.setState({
+          reportData: res.data
+        });
+
+        this.field.setValue('report_content', BraftEditor.createEditorState(res.data.report_content));
+
+        this.field.setValue('report_capture', [
+          {
+            url: res.data.report_capture
+          }
+        ])
       }
     });
   }
@@ -106,8 +133,34 @@ export default class New extends Component {
     }));
   }
 
+  handleSubmit = () => {
+    this.field.validate((errors, values) => {
+      if (!errors) {
+        if (values['report_content']) {
+          values['report_content'] = values['report_content'].toHTML();
+        }
+
+        if (values['report_capture']) {
+          values['report_capture'] = values['report_capture'][0].url;
+        }
+
+        if (values['report_video']) {
+          values['report_video'] = values['report_video'][0].url;
+        }
+
+        Axios.post('/report/saveReport', Object.assign({}, values, {
+          experiment_id: +this.props.match.params.experimentId
+        })).then(res => {
+          res = res.data;
+        });
+      }
+    });
+  }
+
   render() {
-    const { score, examData, experimentData, examContentVisible } = this.state;
+    const { init, getValue } = this.field;
+
+    const { score, examData, experimentData, examContentVisible, experimentDesignVisible } = this.state;
 
     return (
       <div className={styles['container']}>
@@ -141,42 +194,49 @@ export default class New extends Component {
             }
 
             <Form labelAlign="top" >
-                  <FormItem label="实验报告">
-                    <BraftEditor
-                      style={{width: 600, border: '1px solid #333'}}
+              <FormItem label="实验报告">
+                <BraftEditor
+                  style={{width: 600, border: '1px solid #333'}}
+                  value={BraftEditor.createEditorState(getValue('report_content'))}
+                  onChange={(editorState) => {
+                    this.field.setValue('report_content', editorState);
+                  }}
+                />
+              </FormItem>
+              <FormItem label="实验设计图">
+                <div className={styles['aaa']}>
+                  <Upload.Card
+                    listType="card"
+                    action="/upload/upload"
+                    accept="image/png, image/jpg, image/jpeg, image/gif, image/bmp"
+                    limit={1}
+                    name="report_capture"
+                    {...init('report_capture')}
+                  >
+                    设计图上传
+                  </Upload.Card>
+                  <Button onClick={() => {
+                    this.setState({
+                      experimentDesignVisible: true
+                    })
+                  }} type="primary" style={{marginLeft: 48}}>实验图设计</Button>
+                  </div>
+                </FormItem>
 
-                    />
-                  </FormItem>
-                  <FormItem label="实验设计图">
-                    <div className={styles['aaa']}>
-                    <Upload.Card
-                      listType="card"
-                      action="https://www.easy-mock.com/mock/5b713974309d0d7d107a74a3/alifd/upload"
-                      accept="image/png, image/jpg, image/jpeg, image/gif, image/bmp"
-                      defaultValue={[]}
-                      limit={2}
-                      name="a11yUpload"
-                    >
-                          设计图上传
-                        </Upload.Card>
-                        <Button type="primary" style={{marginLeft: 48}}>实验图设计</Button>
-                        </div>
-                    </FormItem>
-
-                    <FormItem label="实验视频">
-                    <Upload.Card
-                            listType="card"
-                            action="https://www.easy-mock.com/mock/5b713974309d0d7d107a74a3/alifd/upload"
-                            accept="image/png, image/jpg, image/jpeg, image/gif, image/bmp"
-                            defaultValue={[]}
-                            limit={2}
-                            name="a11yUpload"
-                        >
-                          实验视频上传
-                        </Upload.Card>
-                    </FormItem>
-                    <Button type="primary" style={{marginTop: 4}}>提交实验报告</Button>
-                </Form>
+                <FormItem label="实验视频">
+                  <Upload.Card
+                    listType="card"
+                    action="/upload/upload"
+                    accept="image/png, image/jpg, image/jpeg, image/gif, image/bmp"
+                    limit={1}
+                    name="report_video"
+                    {...init('report_video')}
+                  >
+                    实验视频上传
+                  </Upload.Card>
+                </FormItem>
+                <Button onClick={this.handleSubmit} type="primary" style={{marginTop: 4}}>提交实验报告</Button>
+            </Form>
           </div>
 
         </div>
@@ -187,6 +247,24 @@ export default class New extends Component {
               examContentVisible: false
             })
           }} handleSubmit={this.handleExamSubmit} />
+        ) : null}
+
+        {experimentDesignVisible ? (
+          <Dialog
+            visible
+            isFullScreen
+            className={styles['experiment-design-dialog']}
+            style={{height: '800px', width: '1200px'}}
+            footer={false}
+            title="实验设计"
+            onClose={() => {
+              this.setState({
+                experimentDesignVisible: false
+              })
+            }}
+          >
+            <iframe style={{width: '100%', height: '900px'}} src={`${location.origin}/canvas`} />
+          </Dialog>
         ) : null}
       </div>
     )

@@ -101,8 +101,6 @@ export default class Task extends Component {
   render() {
     const { score, thoughts, articleData, examData, examContentVisible } = this.state;
 
-    console.log(score);
-
     return (
       <div className={styles['container']}>
         <div className = {styles['main-container']}>
@@ -111,7 +109,6 @@ export default class Task extends Component {
               <h1 className={styles['article-title']}>{articleData.article_title}</h1>
               <p dangerouslySetInnerHTML={{ __html: articleData.article_content }}>
               </p>
-              <img src="//5b0988e595225.cdn.sohucs.com/images/20180523/e8a586d7216b4b6fbbe024f6344f6fa4.jpeg" className={styles['article-img']}/>
             </div>
 
             <div className={styles['comment-list-box']}>

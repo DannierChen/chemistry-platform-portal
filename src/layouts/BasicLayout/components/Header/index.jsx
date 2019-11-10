@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Balloon, Icon, Nav } from '@alifd/next';
+
+import Cookies from 'js-cookie';
+
 import FoundationSymbol from '@icedesign/foundation-symbol';
 import IceImg from '@icedesign/img';
 import headerMenuConfig from '../../../../menuConfig';
@@ -137,10 +140,9 @@ export default class Header extends Component {
                 />
                 <div className="user-profile">
                   <span className="user-name" style={{ fontSize: '13px' }}>
-                    淘小宝
+                    {Cookies.get('userName')}
                   </span>
                   <br />
-                  <span className="user-department">技术部</span>
                 </div>
                 <Icon
                   type="arrow-down-filling"

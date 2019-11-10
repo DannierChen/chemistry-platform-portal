@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router-dom';
 import { Input, Button, Message } from '@alifd/next';
 import IceIcon from '@icedesign/foundation-symbol';
 import axios from 'axios';
-// import Cookies from 'js-cookies';
+import Cookies from 'js-cookie';
 import styles from './index.module.scss';
 
 @withRouter
@@ -44,17 +44,19 @@ class UserLogin extends Component {
        return;
     }
 
-    axios.post('http://192.168.31.44:7001/user/login', {
-      username: this.state.username,
-      password: this.state.password,
+    axios.post('/user/login', {
+      userName: this.state.username,
+      userPass: this.state.password,
     }, {
       withCredentials: true
     }).then((response) => {
       let data = response.data;
       console.log(data);
       if (data.success) {
-        // Cookies.set('userId', data.data.userId);
-        window.location.href = window.location.origin + '/#/dashboard';
+        Cookies.set('userId', data.data.userId);
+        Cookies.set('userName', data.data.userName);
+
+        window.location.href = '/portal/#/dashboard';
       } else {
        Message.error(data.message);
       }
