@@ -48,6 +48,23 @@ export default class New extends Component {
     super(props);
   }
 
+  getRecord = (experimentId) => {
+    Axios('/record/getRecord', {
+      params: {
+        origin: 'experiment',
+        origin_id: experimentId
+      }
+    }).then(res => {
+      res = res.data;
+
+      if (res.success) {
+        this.setState({
+          score: res.data.score
+        });
+      }
+    });
+  }
+
   componentDidMount() {
     const experimentId = this.props.match.params.experimentId;
 
@@ -63,20 +80,7 @@ export default class New extends Component {
       });
     });
 
-    Axios('/record/getRecord', {
-      params: {
-        origin: 'experiment',
-        origin_id: experimentId
-      }
-    }).then(res => {
-      res = res.data;
-
-      if (res.success) {
-        this.setState({
-          score: res.data.score
-        });
-      }
-    });
+    this.getRecord(experimentId);
 
     Axios('/report/getReport', {
       params: {
@@ -127,10 +131,18 @@ export default class New extends Component {
   }
 
   handleExamSubmit = (examRet) => {
+    const experimentId = +this.props.match.params.experimentId;
+
     Axios.post('/record/saveRecord', Object.assign({}, examRet, {
       origin: 'experiment',
-      origin_id: +this.props.match.params.experimentId
-    }));
+      origin_id: experimentId
+    })).then(res => {
+      res = res.data;
+
+      if (res.success) {
+        this.getRecord(experimentId);
+      }
+    });
   }
 
   handleSubmit = () => {

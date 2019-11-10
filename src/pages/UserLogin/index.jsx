@@ -36,8 +36,6 @@ class UserLogin extends Component {
     });
   };
 
-
-
   handleSubmit = (e) => {
     if (this.state.username =="" || this.state.password==""){
        Message.error('error');
@@ -51,12 +49,12 @@ class UserLogin extends Component {
       withCredentials: true
     }).then((response) => {
       let data = response.data;
-      console.log(data);
+      
       if (data.success) {
         Cookies.set('userId', data.data.userId);
         Cookies.set('userName', data.data.userName);
 
-        window.location.href = '/portal/#/dashboard';
+        window.location.href = '/portal/#/article/list';
       } else {
        Message.error(data.message);
       }
@@ -64,8 +62,6 @@ class UserLogin extends Component {
       console.log(error);
     });
   };
-
-
 
   render() {
    const canClick = () => {
