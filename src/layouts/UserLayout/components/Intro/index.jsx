@@ -5,10 +5,10 @@ const LoginIntro = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <div className={styles.title}>云构建平台</div>
-        <p className={styles.description}>一致化的终端开发体验</p>
-        <p className={styles.description}>全链路的开发过程管理</p>
-        <p className={styles.description}>高品质的配套支持服务</p>
+        <div className={styles.title}>高中化学自主学习平台</div>
+        <p className={styles.description}>面向教师、学生和家长</p>
+        <p className={styles.description}>支持在线拓展阅读和视频学习</p>
+        <p className={styles.description}>支持在线实验设计</p>
       </div>
     </div>
   );

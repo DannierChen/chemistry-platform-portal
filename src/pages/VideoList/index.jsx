@@ -53,9 +53,11 @@ export default class Task extends Component {
 
         <div className={styles['video-list']}>
 
-        <div className={styles['video-content']}>
+          <div className={styles['video-content']} onClick={() => {
+            this.props.history.push('/video/detail/2');
+          }}>
             <div>
-              <img src="http://i2.hdslb.com/bfs/archive/9f8350a22bac170255717fd1a1bb2f91d10e685c.jpg@353w_221h.webp" className = {styles['video-img']}/>
+              <img src="http://pznrim6s8.bkt.clouddn.com/9f8350a22bac170255717fd1a1bb2f91d10e685c.jpg" className = {styles['video-img']}/>
             </div>
 
             <div className = {styles['video-info']}>
@@ -85,9 +87,11 @@ export default class Task extends Component {
             </div>
           </div>
 
-          <div className={styles['video-content']}>
+          <div className={styles['video-content']} onClick={() => {
+            this.props.history.push('/video/detail/3');
+          }}>
             <div>
-              <img src="http://i0.hdslb.com/bfs/archive/c1a37d2375aafc7c649a7cae2360662dc596a04f.jpg@380w_240h_100Q_1c.webp" className = {styles['video-img']}/>
+              <img src="http://pznrim6s8.bkt.clouddn.com/c1a37d2375aafc7c649a7cae2360662dc596a04f.jpg" className = {styles['video-img']}/>
             </div>
 
             <div className = {styles['video-info']}>
@@ -117,9 +121,11 @@ export default class Task extends Component {
             </div>
           </div>
 
-          <div className={styles['video-content']}>
+          <div className={styles['video-content']} onClick={() => {
+            this.props.history.push('/video/detail/4');
+          }}>
             <div>
-              <img src="http://i2.hdslb.com/bfs/archive/e5affdb8e8d90236a1bb7a55cfa4346a858ffadf.jpg@380w_240h_100Q_1c.webp" className = {styles['video-img']}/>
+              <img src="http://pznrim6s8.bkt.clouddn.com/e5affdb8e8d90236a1bb7a55cfa4346a858ffadf.jpg" className = {styles['video-img']}/>
             </div>
 
             <div className = {styles['video-info']}>
@@ -148,39 +154,6 @@ export default class Task extends Component {
               </div>
             </div>
           </div>
-
-          <div className={styles['video-content']}>
-            <div>
-              <img src="http://i1.hdslb.com/bfs/archive/cfc12296cd87e96da9392ee35fddec1b2f5c68cd.jpg@380w_240h_100Q_1c.webp" className = {styles['video-img']}/>
-            </div>
-
-            <div className = {styles['video-info']}>
-              <div className={styles['video-header']}>
-                <span>刘老师</span>
-                {DOT}
-                <span>2天前</span>
-                {DOT}
-                <span>评说"硫"与"氨"的功与过</span>
-              </div>
-              <div className={styles['video-title']}>
-                <p>你认识这里的几个仪器？</p>
-                <span className={styles['video-intro']}>固液不加热型装置</span>
-              </div>
-              <div className = {styles['video-footer']}>
-                <Button.Group  size = "small" className={styles['video-btn']}>
-                    <Button >
-                      <Icon type="attachment" />
-                      2
-                    </Button>
-                    <Button>
-                      <Icon type="edit" />
-                      3
-                    </Button>
-                </Button.Group>
-              </div>
-            </div>
-          </div>
-
 
         </div>
       </div>

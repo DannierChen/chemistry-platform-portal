@@ -1,3 +1,5 @@
+@import '~video-react/styles/scss/video-react';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -137,7 +139,7 @@
 .testBtn{
   width: 80%;
   margin-bottom: 20px;
-  padding: 12px 0; 
+  padding: 12px 0;
 }
 
 .other {

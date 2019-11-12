@@ -5,7 +5,16 @@ import Footer from './components/Footer';
 import MainRoutes from './MainRoutes';
 import './index.scss';
 
+import Cookies from 'js-cookie';
+
+if (!Cookies.get('userName')) {
+  window.location.href = `${location.origin}/portal?login=true#/user/login`;
+}
+
 export default class BasicLayout extends Component {
+
+
+
   render() {
     return (
       <Layout className="basic-layout">

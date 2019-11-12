@@ -25,7 +25,7 @@ export default class Task extends Component {
           <div className={styles['video-area']}>
             <div className={styles['video-content']}>
               <h1 className={styles['video-title']}>生命的元素，连结你和万物</h1>
-              <Player  
+              <Player
               playsInline
               poster="http://i0.hdslb.com/bfs/archive/c1a37d2375aafc7c649a7cae2360662dc596a04f.jpg@380w_240h_100Q_1c.webp"
               src="https://www.w3school.com.cn/example/html5/mov_bbb.mp4"
@@ -93,10 +93,10 @@ export default class Task extends Component {
                 <div className={styles['test-list']}>
                   <div style={{padding: " 12px 0 "}}>观看完毕后，请点击按钮完成试卷</div>
                   <div>
-                  <Button type="primary" className={styles.testBtn}>自测试卷</Button> 
+                  <Button type="primary" className={styles.testBtn}>自测试卷</Button>
                   </div>
                 </div>
-                
+
             </div>  */}
           </div>
         </div>

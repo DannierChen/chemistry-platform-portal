@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Icon, Button,Tag, Input } from '@alifd/next';
+import { Icon, Button,Tag, Input, Message } from '@alifd/next';
 
 import Axios from 'axios';
 
@@ -24,6 +24,7 @@ export default class Task extends Component {
   state = {
     score: undefined,
     thoughts: '',
+    submited: false,
     articleData: {},
     examContentVisible: false
   }
@@ -60,7 +61,8 @@ export default class Task extends Component {
       if (res.success) {
         this.setState({
           score: res.data.score,
-          thoughts: res.data.thoughts
+          thoughts: res.data.thoughts,
+          submited: true
         });
       }
     });
@@ -95,11 +97,22 @@ export default class Task extends Component {
     Axios.post('/record/saveRecord', Object.assign({}, examRet, {
       origin: 'article',
       origin_id: +this.props.match.params.articleId
-    }));
+    })).then(res => {
+      res = res.data;
+
+      if (res.success) {
+        Message.success({
+          content: '提交成功',
+          afterClose: () => {
+            location.reload();
+          }
+        })
+      }
+    });
   }
 
   render() {
-    const { score, thoughts, articleData, examData, examContentVisible } = this.state;
+    const { score, thoughts, submited, articleData, examData, examContentVisible } = this.state;
 
     return (
       <div className={styles['container']}>
@@ -181,19 +194,17 @@ export default class Task extends Component {
                   aria-label="input max length 100"
                   className={styles['input']}
                   /><br /><br />
-                  <div>
-                    <Button
-                      type="primary"
-                      onClick={() => {
-                        this.handleExamSubmit({
-                          thoughts
-                        })
-                      }}
-                      className={styles.testBtn}
-                    >
-                      提交感想
-                    </Button>
-                  </div>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      this.handleExamSubmit({
+                        thoughts
+                      })
+                    }}
+                    className={styles.testBtn}
+                  >
+                    提交感想
+                  </Button>
                 </div>
 
             </div>
@@ -208,7 +219,7 @@ export default class Task extends Component {
                     <>
                       <div style={{padding: " 12px 0 "}}>请先提交感想，然后点击按钮完成试卷</div>
                       <div>
-                        <Button disabled={score === undefined && !thoughts} type="primary" onClick={this.handleOpenExam} className={styles.testBtn}>自测试卷</Button>
+                        <Button disabled={!submited} type="primary" onClick={this.handleOpenExam} className={styles.testBtn}>自测试卷</Button>
                       </div>
                     </>
                   )
