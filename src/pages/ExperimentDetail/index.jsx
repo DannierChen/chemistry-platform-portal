@@ -164,6 +164,14 @@ export default class New extends Component {
           experiment_id: +this.props.match.params.experimentId
         })).then(res => {
           res = res.data;
+
+          if (res.success) {
+            Message.success({
+              align: 'cc cc',
+              content: '实验报告提交成功',
+              hasMask: true
+            });
+          }
         });
       }
     });
@@ -179,7 +187,7 @@ export default class New extends Component {
         {
           score ? (
             <Message type="success" title="提示" style={{marginBottom: 12}}>
-              请先完成预习试卷，才能进入实验流程
+              你已通过试卷测试，请完成下面的实验报告
             </Message>
           ) : (
             <Message type="help" title="提示" style={{marginBottom: 12}}>

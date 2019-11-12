@@ -13,7 +13,7 @@ import styles from './index.module.scss';
 
 const DOT = <span>·</span>
 
-export default class Task extends Component {
+export default class ArticleList extends Component {
   static displayName = 'Task';
 
   static propTypes = {};
@@ -21,15 +21,21 @@ export default class Task extends Component {
   static defaultProps = {};
 
   state = {
-    articleList: []
+    termList: [],
+    selectedTerm: -1,
+    chapterList: [],
+    articleList: [],
+    selectedChapterId: undefined,
   }
 
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    Axios('/article/list').then(res => {
+  getList = (params = {}) => {
+    Axios('/article/list', {
+      params: params
+    }).then(res => {
       res = res.data;
 
       if (res.success) {
@@ -37,11 +43,52 @@ export default class Task extends Component {
           articleList: res.data
         });
       }
+    });
+  }
+
+  componentDidMount() {
+    this.getList();
+
+    Axios('/getTermList').then(res => {
+      res = res.data;
+
+      if (res.success) {
+        this.setState({
+          termList: res.data
+        });
+      }
     })
   }
 
+  handleTermChange = (term) => {
+    const { termList } = this.state;
+
+    const selectedTerm = termList.filter(item => item.value === term.value)[0];
+
+    this.setState({
+      selectedTerm: term.value,
+      selectedChapterId: undefined,
+      chapterList: selectedTerm.children
+    }, () => {
+      this.getList({
+        term_id: term.value
+      });
+    })
+  }
+
+  handleChapterChange = (chapter) => {
+    this.setState({
+      selectedChapterId: chapter
+    }, () => {
+      this.getList({
+        term_id: this.state.selectedTerm,
+        chapter_id: chapter
+      });
+    });
+  }
+
   render() {
-    const { articleList } = this.state;
+    const { termList, articleList, selectedTerm, chapterList, selectedChapterId } = this.state;
 
     return (
       <div className={styles.container}>
@@ -49,24 +96,30 @@ export default class Task extends Component {
           <div className={styles['filter-item']}>
             <span className={styles['filter-label']}>学期</span>
             <TagGroup>
-              <SelectableTag checked className={styles['custom-tag']}>高一</SelectableTag>
-              <SelectableTag className={styles['custom-tag']}>高二</SelectableTag>
-              <SelectableTag className={styles['custom-tag']}>高三</SelectableTag>
+              <SelectableTag checked={selectedTerm === -1} className={styles['custom-tag']}>全部</SelectableTag>
+              {
+                termList.map((term, index) => {
+                  return <SelectableTag checked={selectedTerm === term.value} onChange={this.handleTermChange.bind(this, term, index)} className={styles['custom-tag']}>{term.label}</SelectableTag>
+                })
+              }
             </TagGroup>
           </div>
 
-          <div className={styles['filter-item']} style={{ marginTop: 16 }}>
-            <span className={styles['filter-label']}>章节</span>
-            <TagGroup>
-              <SelectableTag checked className={styles['custom-tag']}>打开原子世界的大门</SelectableTag>
-              <SelectableTag className={styles['custom-tag']}>开发海水中的卤素元素</SelectableTag>
-              <SelectableTag className={styles['custom-tag']}>探索原子构建物质的奥秘</SelectableTag>
-              <SelectableTag className={styles['custom-tag']}>剖析物质变化中的能量变化</SelectableTag>
-              <SelectableTag className={styles['custom-tag']}>评说硫、氮的"功"与"过"</SelectableTag>
-              <SelectableTag className={styles['custom-tag']}>揭示化学反应速率和平衡之谜</SelectableTag><br /><br />
-              <SelectableTag className={styles['custom-tag']}>探究电解质溶液的性质</SelectableTag>
-            </TagGroup>
-          </div>
+          {
+            selectedTerm === -1 ? null : (
+              <div className={styles['filter-item']} style={{ marginTop: 16 }}>
+                <span className={styles['filter-label']}>章节</span>
+                <TagGroup>
+                  {
+                    chapterList.map(chapter => {
+                      return <SelectableTag onChange={this.handleChapterChange.bind(this, chapter.value)} checked={selectedChapterId === chapter.value} className={styles['custom-tag']}>{chapter.label}</SelectableTag>
+                    })
+                  }
+                </TagGroup>
+              </div>
+            )
+          }
+
         </div>
 
         <div className={styles['article-list']}>

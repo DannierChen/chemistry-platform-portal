@@ -63,11 +63,7 @@ const routerConfig = [
   {
     path: '/experiment/detail/:experimentId',
     component: ExperimentDetail,
-  },
-  // {
-  //   path: '/discuz/list',
-  //   component: DiscuzList,
-  // }
+  }
 ];
 
 export default routerConfig;
