@@ -25,9 +25,9 @@ export default () => {
           textAlign: 'right',
         }}
       >
-        阿里巴巴集团
+        高中化学引导式自主学习平台
         <br />
-        © 2018 版权所有
+        © 2019 版权所有
       </div>
     </div>
   );

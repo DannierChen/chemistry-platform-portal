@@ -96,7 +96,7 @@ export default class ArticleList extends Component {
           <div className={styles['filter-item']}>
             <span className={styles['filter-label']}>学期</span>
             <TagGroup>
-              <SelectableTag checked={selectedTerm === -1} className={styles['custom-tag']}>全部</SelectableTag>
+              <SelectableTag onChange={this.handleChapterChange.bind(this, -1)} checked={selectedTerm === -1} className={styles['custom-tag']}>全部</SelectableTag>
               {
                 termList.map((term, index) => {
                   return <SelectableTag checked={selectedTerm === term.value} onChange={this.handleTermChange.bind(this, term, index)} className={styles['custom-tag']}>{term.label}</SelectableTag>

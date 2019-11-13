@@ -25,9 +25,7 @@ const asideMenuConfig = [
   {
     name: '讨论专区',
     path: '/discuz/list',
-    icon: 'question2',
-    external: true,
-    newWindow: true,
+    icon: 'question2'
   }
 ];
 

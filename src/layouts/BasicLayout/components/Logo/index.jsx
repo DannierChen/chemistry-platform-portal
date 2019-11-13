@@ -6,7 +6,7 @@ export default class Logo extends Component {
     return (
       <div className={styles.container}>
         <a href="/" className={styles.logoText}>
-          云构建平台
+          学习平台
         </a>
       </div>
     );

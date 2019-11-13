@@ -15,6 +15,9 @@ import VideoDetail from './pages/Video';
 import ExperimentDetail from './pages/ExperimentDetail';
 import ExperimentList from './pages/ExperimentList';
 
+import DiscuzList from './pages/DiscuzList';
+import DiscuzDetail from './pages/Discuz';
+
 const routerConfig = [
   {
     path: '/user/login',
@@ -55,6 +58,14 @@ const routerConfig = [
   {
     path: '/article/detail/:articleId',
     component: ArticleDetail,
+  },
+  {
+    path: '/discuz/list',
+    component: DiscuzList,
+  },
+  {
+    path: '/discuz/detail/:quesId',
+    component: DiscuzDetail,
   },
   {
     path: '/experiment/list',
